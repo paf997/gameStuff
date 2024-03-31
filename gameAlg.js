@@ -1,16 +1,23 @@
-const whiteTokens = [{color:"white", value:1},
-                     {color:"white", value:1},
-                     {color:"white", value:1},
-                     {color:"white", value:1},
-                     {color:"white", value:2},
-                     {color:"white", value:2},
-                     {color:"white", value:3}];
+const whiteTokens = [{type:"white", value:1},
+                     {type:"white", value:1},
+                     {type:"white", value:1},
+                     {type:"white", value:2},
+                     {type:"white", value:2},
+                     {type:"white", value:2},
+                     {type:"white", value:3},
+                     {type:"white", value:3}];
 
-const otherTokens = [{color:"weapon", value:1},
-                    {color:"armour", value:1},
-                    {color:"attack", value:1},
-                    {color:"defense", value:1},
-                    {color:"defense", value:2}];
+const otherTokens = [{type:"weapon", value:1},
+                    {type:"armour", value:1},
+                    {type:"attack", value:2},
+                    {type:"defense", value:2},
+                    {type:"wild", value:1}, 
+                    {type:"wild", value:1},
+                    {type:"wild", value:1},
+                    {type:"accessory", value:1}];
+
+const altPlayerTokens = [{type:"attack", value:1},
+                        {type:"attack", value:1},]
 
 const playerDrawnTokens = [];
 
@@ -32,47 +39,56 @@ for (cards = 0; cards < playerHandLimit; cards++){
     let randomCardNum = Math.floor(Math.random() * playerStartingCards.length);
     let randomCard = playerStartingCards[randomCardNum];
     playerHand.push(randomCard);
-    console.log("Card " + cards + " " + randomCard.name + " :" + randomCard.description);
+    //console.log("Card " + cards + " " + randomCard.name + " :" + randomCard.description);
 }
+console.table(playerHand);
 
 /******************************************   Monster and Character Stats ***********************************************************/
 let impHP = 12;
 let monsterAttTotal = 0;
 let monsterDefTotal = 0;
-const impActionsList = [{name:"Attack1", cost:3, type:"Attack", attack:5},
-                    {name:"Attack2", cost:4, type:"Attack", attack:7},
-                    {name:"Defense1", cost:2, type:"Defense", defense:2},
-                    {name:"Defense1", cost:3, type:"Defense", defense:3}];
-const impActionsTaken =[];
+const impActionsList = [{name:"Attack1", cost:3, type:"Attack", attack:8},
+                    {name:"Attack2", cost:4, type:"Attack", attack:11},
+                    {name:"Defense1", cost:2, type:"Defense", defense:3},
+                    {name:"Defense1", cost:3, type:"Defense", defense:5}];
+const imp1Actions = drawnMonsterActions();
+const imp2Actions = drawnMonsterActions();
     //********************  Randomize  Monster acctions. keep doing actions while cost is less than 7 ******************/
-const monsterBust = 7;
-let powerSpent = 0;
-let  busted = false;
-while (busted != true){
-    let randomNum = Math.floor(Math.random() * impActionsList.length);
-    let currentMonAction  = impActionsList[randomNum];
-    //console.log(randomNum + " This" + currentMonAction.attack)
-    if(currentMonAction.type === "Attack" && (powerSpent + currentMonAction.cost <= 7)){
-        monsterAttTotal += currentMonAction.attack;
-        powerSpent += currentMonAction.cost;
-        impActionsTaken.push(currentMonAction);
-    }else if (currentMonAction.type === "Defense" && (powerSpent + currentMonAction.cost <= 7)){
-        monsterDefTotal += currentMonAction.defense;
-        //console.log("Def: " + monsterDefTotal);
-        powerSpent += currentMonAction.cost;
-        impActionsTaken.push(currentMonAction);
-    }else{
-        busted = true;
+
+
+function drawnMonsterActions(){
+    const monsterBust = 7;
+    let powerSpent = 0;
+    let  busted = false;
+    const impActionsTaken =[];
+    while (busted != true){
+        let randomNum = Math.floor(Math.random() * impActionsList.length);
+        let currentMonAction  = impActionsList[randomNum];
+        //console.log(randomNum + " This" + currentMonAction.attack)
+        if(currentMonAction.type === "Attack" && (powerSpent + currentMonAction.cost <= 7)){
+            monsterAttTotal += currentMonAction.attack;
+            powerSpent += currentMonAction.cost;
+            impActionsTaken.push(currentMonAction);
+        }else if (currentMonAction.type === "Defense" && (powerSpent + currentMonAction.cost <= 7)){
+            monsterDefTotal += currentMonAction.defense;
+            //console.log("Def: " + monsterDefTotal);
+            powerSpent += currentMonAction.cost;
+            impActionsTaken.push(currentMonAction);
+        }else{
+            busted = true;
+        }
     }
+    console.log("Total spent:  " + powerSpent);
+    console.log("Monster Att: " + monsterAttTotal + " Def: "  + monsterDefTotal );
+    return impActionsTaken;
 }
-console.log("Total spent:  " + powerSpent);
-console.log("Monster Att: " + monsterAttTotal + " Def: "  + monsterDefTotal )
-console.table(impActionsTaken);
+
+console.table(imp1Actions);
+console.table(imp2Actions);
 
 const fighter = {
     HP:15,
 }
-
 //console.log("Imp: " + JSON.stringify(imp));
 
 /******************************************   Monster Stuff   ***********************************************************/
@@ -86,7 +102,7 @@ const graphWhiteValues = Array(3).fill(0); //low 6 high 8
 const graphOtherValues = Array(14).fill(0); //  low 0 high 14
 const graphDefValues =  Array(3).fill(0);
 
-let bustNum = 6;
+let bustNum = 5;
 
 let defValCurrent = 0;
 let attValCurrent = 0;
@@ -100,17 +116,17 @@ function playTurn(turns){
     while (n < turns){
         while (whiteValCurrent < bustNum){
             startingNumberChips = startingBag.length;
-            let randomChip = Math.floor(Math.random() * startingNumberChips );
+            let randomChip = Math.floor(Math.random() * startingNumberChips);
             //console.log("randomChip =  "+ randomChip);
             let randChipValue = startingBag[randomChip];
             //console.log(randChipValue  );
 
-            if (randChipValue.color === "white"){
+            if (randChipValue.type === "white"){
                 whiteValCurrent += randChipValue.value;
-            }else if(randChipValue.color === "defense"){
+            }else if(randChipValue.type === "defense"){
                 defValCurrent+=randChipValue.value;
                 otherValCurrent += randChipValue.value;
-            }else if(randChipValue.color === "attack"){
+            }else if(randChipValue.type === "attack"){
                 attValCurrent+=randChipValue.value;
                 otherValCurrent += randChipValue.value;
             }else{
@@ -144,7 +160,7 @@ function playTurn(turns){
         
         //used for seeeing drawn tokens each turn
         /*for (tokens =0; tokens< playerDrawnTokens.length; tokens++){
-            console.log("Token " + tokens +  ": " + playerDrawnTokens[tokens].color + " " + playerDrawnTokens[tokens].value);
+            console.log("Token " + tokens +  ": " + playerDrawnTokens[tokens].type + " " + playerDrawnTokens[tokens].value);
         }*/
         console.table(playerDrawnTokens);
 
