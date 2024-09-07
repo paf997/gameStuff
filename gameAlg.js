@@ -1,19 +1,18 @@
 const whiteTokens = [{type:"white", value:1},
                      {type:"white", value:1},
                      {type:"white", value:1},
-                     {type:"white", value:2},
+                     {type:"white", value:1},
                      {type:"white", value:2},
                      {type:"white", value:2},
                      {type:"white", value:3},
-                     {type:"white", value:3}];
+                     ];
 
 const otherTokens = [{type:"weapon", value:1},
                     {type:"armour", value:1},
-                    {type:"attack", value:2},
                     {type:"defense", value:2},
+                    {type:"defense", value:1},
+                    {type:"attack", value:1},
                     {type:"wild", value:1}, 
-                    {type:"wild", value:1},
-                    {type:"wild", value:1},
                     {type:"accessory", value:1}];
 
 const altPlayerTokens = [{type:"attack", value:1},
