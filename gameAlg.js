@@ -12,22 +12,32 @@ const otherTokens = [{type:"weapon", value:1},
                     {type:"defense", value:2},
                     {type:"defense", value:1},
                     {type:"attack", value:1},
+                    {type:"attack", value:1},
                     {type:"wild", value:1}, 
+                    {type:"wild", value:1},
                     {type:"accessory", value:1}];
+
+                    function calc_att_chit(){
+                        return 0;
+                    }
 
 const altPlayerTokens = [{type:"attack", value:1},
                         {type:"attack", value:1},]
 
+const playerPassiveAbt = [{type:"attack", value:calc_att_chit()},
+                        {type:"defense", value:5}
+]
+
 const playerDrawnTokens = [];
 
-const playerStartingCards = [{name:"Attack 1", type:"Attack", cost:5, Damage:4, BonusTrigger:"AttackToken", BonusTriggerValue:1, BonusValueAdded:2,description:"cost:5 Dam: 4, +2 / att token"}, 
-                            {name:"Attack 1", type:"Attack", cost:5, Damage:4, BonusTrigger:"AttackToken", BonusTriggerValue:1, BonusValueAdded:2,description:"cost:5 Dam: 4, +2 / att token"}, 
-                            {name:"Attack 1", type:"Attack", cost:5, Damage:4, BonusTrigger:"AttackToken", BonusTriggerValue:1, BonusValueAdded:2,description:"cost:5 Dam: 4, +2 / att token"}, 
-                            {name:"Attack 1", type:"Attack", cost:5, Damage:4, BonusTrigger:"AttackToken", BonusTriggerValue:1, BonusValueAdded:2,description:"cost:5 Dam: 4, +2 / att token"},   
-                            {name:"Defense 1", type:"Defense", cost:5, Defense:3, BonusTrigger:"DefenseToken", BonusTriggerValue:1, BonusValueAdded:3,description:"cost:5 Def: 3, +3 / Def token"},
-                            {name:"Defense 1", type:"Defense", cost:5, Defense:3, BonusTrigger:"DefenseToken", BonusTriggerValue:1, BonusValueAdded:3,description:"cost:5 Def: 3, +3 / Def token"},
-                            {name:"Defense 1", type:"Defense", cost:5, Defense:3, BonusTrigger:"DefenseToken", BonusTriggerValue:1, BonusValueAdded:3,description:"cost:5 Def: 3, +3 / Def token"},
-                            {name:"Defense 1", type:"Defense", cost:5, Defense:3, BonusTrigger:"DefenseToken", BonusTriggerValue:1, BonusValueAdded:3,description:"cost:5 Def: 3, +3 / Def token"},
+const playerStartingCards = [{name:"Attack 1", type:"Attack", cost:2, Damage:2, BonusTrigger:"AttackToken", BonusTriggerValue:1, BonusValueAdded:2,description:"cost:5 Dam: 4, +2 / att token"}, 
+                            {name:"Attack 1", type:"Attack", cost:2, Damage:2, BonusTrigger:"AttackToken", BonusTriggerValue:1, BonusValueAdded:2,description:"cost:5 Dam: 4, +2 / att token"}, 
+                            {name:"Attack 1", type:"Attack", cost:2, Damage:2, BonusTrigger:"AttackToken", BonusTriggerValue:1, BonusValueAdded:2,description:"cost:5 Dam: 4, +2 / att token"}, 
+                            {name:"Attack 1", type:"Attack", cost:2, Damage:2, BonusTrigger:"AttackToken", BonusTriggerValue:1, BonusValueAdded:2,description:"cost:5 Dam: 4, +2 / att token"},   
+                            {name:"Defense 1", type:"Defense", cost:2, Defense:2, BonusTrigger:"DefenseToken", BonusTriggerValue:1, BonusValueAdded:3,description:"cost:5 Def: 3, +3 / Def token"},
+                            {name:"Defense 1", type:"Defense", cost:2, Defense:2, BonusTrigger:"DefenseToken", BonusTriggerValue:1, BonusValueAdded:3,description:"cost:5 Def: 3, +3 / Def token"},
+                            {name:"Defense 1", type:"Defense", cost:2, Defense:2, BonusTrigger:"DefenseToken", BonusTriggerValue:1, BonusValueAdded:3,description:"cost:5 Def: 3, +3 / Def token"},
+                            {name:"Defense 1", type:"Defense", cost:2, Defense:2, BonusTrigger:"DefenseToken", BonusTriggerValue:1, BonusValueAdded:3,description:"cost:5 Def: 3, +3 / Def token"},
                             ];
 
 
@@ -167,6 +177,27 @@ function playTurn(turns){
         /*for (c =0; c < graphTotalValues.length; c++){
             console.log((c+6) + ": " + graphTotalValues[c] +  " " +(graphTotalValues[c]/n) + "%");
         }*/
+}
+
+function playTurn2(){
+    //draw cards()
+    //playCards()
+    //endTurn()
+    
+}
+
+function playCard(playerHand){
+    //while cards & !bust & !threshhold{}
+    //  evalCard(playerHand[n])
+    //end
+}
+
+function endTurn(){
+
+}
+
+function evalCard(card){
+    let dt = card.type
 }
 
 playTurn(1);
